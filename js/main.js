@@ -14,9 +14,9 @@ L’output del prezzo finale va messo fuori in forma umana
 
 
 // Dichiaro le mie variabili GLOBALI
-let howKm, userEta, finalPrice, messaggio;
+let howKm, userEta, calcPrice, finalPrice, messaggio;
 
-// Chiedo quanti km utente vuole percorrere l'utente
+// Chiedo quanti km vuole percorrere l'utente
 howKm = parseInt(prompt("Quanti km vuoi percorrere?"));
 
 // Chiedo età dell'utente
@@ -28,9 +28,20 @@ console.log("km da percorrere =", howKm, "/ età =", userEta);
 const euroKm = 0.21;
 
 // Calcolo prezzo finale
-finalPrice = howKm * euroKm;
+calcPrice = howKm * euroKm;
 
-console.log("prezzo finale =", finalPrice, "€");
+if (userEta < 18) { // sconto minorenni
+    finalPrice = calcPrice - (calcPrice * 0.20);
+    console.log("prezzo scontato 20% (poichè minorenne) =", finalPrice, "€");
+
+} else if (userEta > 65) { // sconto over 65
+    finalPrice = calcPrice - (calcPrice * 0.40);
+    console.log("prezzo scontato 40% (poichè over 65) =", finalPrice, "€");
+
+} else { // sconto (nullo) tra 18-65 anni
+    finalPrice = calcPrice;
+    console.log("prezzo senza sconto (poichè tra 18-65 anni) =", finalPrice, "€")
+}
 
 // Creo messaggio per l'utente
 messaggio = finalPrice.toFixed(2) + "€";
