@@ -14,7 +14,7 @@ L’output del prezzo finale va messo fuori in forma umana
 
 
 // Dichiaro le mie variabili GLOBALI
-let howKm, userEta, calcPrice, finalPrice, messaggio;
+let howKm, userEta, calcPrice, finalPrice, calcPriceCorretto, preOutputPrice, messaggio;
 
 // Chiedo quanti km vuole percorrere l'utente
 howKm = parseInt(prompt("Quanti km vuoi percorrere?"));
@@ -44,7 +44,18 @@ if (userEta < 18) { // sconto minorenni
 }
 
 // Creo messaggio per l'utente
-messaggio = finalPrice.toFixed(2) + "€";
+calcPriceCorretto = calcPrice.toFixed(2) + "€";
+preOutputPrice = finalPrice.toFixed(2) + "€";
+
+if (userEta < 18) { // sconto minorenni
+    messaggio = "Complimenti: poichè minorenne hai ottenuto uno sconto del 20% e quindi il prezzo finale è " + preOutputPrice + " e non " + calcPriceCorretto;
+
+} else if (userEta > 65) { // sconto over 65
+    messaggio = "Uno sconto giusto per il vetusto. 40% sul prezzo finale, che sarà quindi di " + preOutputPrice + " e non " + calcPriceCorretto;
+
+} else { // sconto (nullo) tra 18-65 anni
+    messaggio = "Mi dispiace, ma paghi prezzo pieno. Il prezzo finale è " + preOutputPrice;
+}
 
 // Mostro il  messaggio a schermo
 document.getElementById("mio_id").innerHTML = messaggio;
